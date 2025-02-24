@@ -19,10 +19,10 @@ class JanicePriceProviderController extends Controller
         $region = $existing->configuration['region'] ?? 10000002;
         $price_type = $existing->configuration['price_type'] ?? 'split';
         $cache = $existing->configuration['cache'] ?? 12;
-        $timeout = $existing->configuration['timeout'] ?? 5;        
-        
+        $timeout = $existing->configuration['timeout'] ?? 5;
+        $allow_empty = $existing->configuration['allow_empty'] ?? 'no';
 
-        return view('janicepriceprovider::configuration', compact(['id',  'name', 'apikey', 'immediate', 'region', 'price_type', 'cache', 'timeout']));
+        return view('janicepriceprovider::configuration', compact(['id',  'name', 'apikey', 'immediate', 'region', 'price_type', 'cache', 'timeout', 'allow_empty']));
     }
 
     public function configurationPost(Request $request) {
@@ -35,6 +35,7 @@ class JanicePriceProviderController extends Controller
             'price_type' => 'required|string|in:sell,sell5,sell30,buy,buy5,buy30,split,split5,split30',
             'cache'=>'required|integer|min:1|max:24',
             'timeout'=>'required|integer',
+            'allow_empty'=>'required|string|in:yes,no',
         ]);
 
         $model = PriceProviderInstance::findOrNew($request->id);
@@ -48,6 +49,7 @@ class JanicePriceProviderController extends Controller
             'price_type' => $request->price_type,
             'cache' => $request->cache,
             'timeout' => $request->timeout,
+            'allow_empty' => $request->allow_empty,
         ];
         $model->save();
 

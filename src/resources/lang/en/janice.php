@@ -28,5 +28,8 @@ return [
     'min'=>'Minimum',
     'avg'=>'Weighted Average',
     'median'=>'Median',
-    'percentile'=>'Percentile'
+    'percentile' => 'Percentile',
+    'allow_empty' => 'Allow empty prices',
+    'yes' => 'Yes',
+    'no' => 'No',
 ];

@@ -63,6 +63,14 @@
             </div>
 
             <div class="form-group">
+                <label for="allow_empty">{{ trans('janicepriceprovider::janice.allow_empty') }}</label>
+                <select name="allow_empty" id="allow_empty" class="form-control" required>
+                    <option value="yes" @if($allow_empty==='yes' ) selected @endif>{{ trans('janicepriceprovider::yes') }}</option>
+                    <option value="no" @if($price_type==='no' ) selected @endif>{{ trans('janicepriceprovider::no') }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="cache">{{ trans('janicepriceprovider::janice.cache') }}</label>
                 <input required type="number" name="cache" id="cache" class="form-control" value="{{ $cache ?? '12' }}">
             </div>

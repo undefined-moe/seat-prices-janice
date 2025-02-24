@@ -113,6 +113,10 @@ class JanicePriceProvider implements IPriceProviderBackend
         foreach ($items as $item) {
             $price = $typeIDs[$item->getTypeID()] ?? null;
             if ($price === null) {
+                if ($configuration['allow_empty'] == 'yes') {
+                    $item->setPrice(0);
+                    continue;
+                }
                 throw new PriceProviderException('Janice didn\'t respond with the requested prices.');
             }
             if (!(is_int($price) || is_float($price))) {
